@@ -1,33 +1,79 @@
 "use client";
 
+import React, { useState } from 'react';
 import { addMemos } from '@/api';
-import React, { ChangeEvent, FormEvent, useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    Card,
+    CardContent,
+    CardActions,
+    TextField,
+} from '@mui/material';
 
-const AddMemo = () => {
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import CloseIcon from '@mui/icons-material/Close';
 
+interface AddMemoProps {
+    open: boolean;
+    onClose: () => void;
+}
+
+const AddMemo: React.FC<AddMemoProps> = ({ open, onClose }) => {
     const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
-    const hadleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        await addMemos({ id: uuidv4(), title: title, content: 'content'});
-
+        await addMemos({ id: uuidv4(), title: title, content: content });
         setTitle('');
-    }
+        setContent('');
+        onClose();
+        location.reload();
+    };
 
     return (
-        <form className='mb-4 space-y-3' onSubmit={hadleSubmit}>
-            <input
-            type="text"
-            className='w-full border px-4 py-2 rounded-lg focus:outline-none focus:border-blue-400'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
-            }
-            value={title}
-            />
-            <button className='w-full px-4  py-2 text-white bg-blue-500 rounded transform hover:bg-blue-400 hover:scale-95 duration-200'>AddMemo</button>
-        </form>
+        <Dialog
+            open={open}
+            onClose={onClose}
+            maxWidth="md"
+            fullWidth
+        >
+            <DialogContent>
+                <Card>
+                    <CardContent>
+                        <TextField
+                            fullWidth
+                            label="Title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            variant="outlined"
+                            margin="normal"
+                        />
+                        <TextField
+                            fullWidth
+                            label="Content"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            variant="outlined"
+                            margin="normal"
+                            multiline
+                            rows={8}
+                        />
+                    </CardContent>
+                    <CardActions style={{ justifyContent: 'flex-end' }}>
+                        <Button onClick={handleSubmit} color="primary" variant="contained">
+                            <SaveAltIcon />
+                        </Button>
+                        <Button onClick={onClose} color="secondary">
+                            <CloseIcon />
+                        </Button>
+                    </CardActions>
+                </Card>
+            </DialogContent>
+        </Dialog>
     );
 }
 
