@@ -13,6 +13,9 @@ import {
     DialogContent
 } from '@mui/material';
 
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import CloseIcon from '@mui/icons-material/Close';
+
 interface MemoPageProps {
     memo: Memos;
     onClose: () => void;
@@ -58,10 +61,10 @@ const MemoPage: React.FC<MemoPageProps> = ({ memo, onClose }) => {
                     </CardContent>
                     <CardActions style={{ justifyContent: 'flex-end' }}>
                         <Button onClick={handleSave} color="primary" variant="contained">
-                            Save
+                            <SaveAltIcon />
                         </Button>
                         <Button onClick={onClose} color="secondary">
-                            Close
+                            <CloseIcon />
                         </Button>
                     </CardActions>
                 </Card>
