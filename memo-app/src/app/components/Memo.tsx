@@ -4,10 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop, DropTargetMonitor } from 'react-dnd';
 import { XYCoord } from 'dnd-core';
 import { Memos } from '@/types';
-import { editMemos, deleteMemos } from '@/api';
+import { deleteMemos } from '@/api';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { Card, CardContent, Typography, IconButton } from '@mui/material';
+
 
 import MemoPage from './MemoPage';
 
@@ -82,33 +83,46 @@ const Memo = ({ memo, index, moveMemo }: MemoProps) => {
 
     const handleCloseMemoPage = () => {
         setIsOpenMemoPage(false);
-        location.reload(); // MemoPageでの編集を反映するためにリロード
+        location.reload();
     };
+
+    const wordLimitedContent = memo.content
+    ? memo.content.slice(0, 20) + (memo.content.length > 20 ? '...' : '')
+    : '';
 
     return (
         <>
-            <li
+            <Card
                 ref={dragRef}
-                className={`flex justify-between p-4 bg-white border-l-4 border-blue-500 rounded shadow ${isDragging ? 'opacity-50' : ''}`}
+                className={`mb-4 ${isDragging ? 'opacity-50' : ''}`}
             >
-                <span className=''>
-                    {memo.title}
-                </span>
-                <div>
-                    <button
-                        className='text-blue-500 mr-3'
-                        onClick={handleEdit}
-                    >
-                        <EditIcon />
-                    </button>
-                    <button
-                        className='text-red-600'
-                        onClick={handleDelete}
-                    >
-                        <DeleteIcon />
-                    </button>
-                </div>
-            </li>
+                <CardContent className={`flex justify-between p-4 bg-white border-l-4 border-blue-500 rounded shadow>`} >
+                    <div>
+                        <Typography variant="h6" component="h2">
+                            {memo.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {wordLimitedContent}
+                        </Typography>
+                    </div>
+                    <div>
+                        <IconButton
+                            color="primary"
+                            onClick={handleEdit}
+                            aria-label="edit"
+                        >
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton
+                            color="error"
+                            onClick={handleDelete}
+                            aria-label="delete"
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                    </div>
+                </CardContent>
+            </Card>
             {isOpenMemoPage && (
                 <MemoPage memo={memo} onClose={handleCloseMemoPage} />
             )}

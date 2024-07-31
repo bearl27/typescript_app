@@ -1,20 +1,52 @@
-import Image from "next/image";
-import AddMemo from "./components/AddMemo";
+import { Container, Typography, Paper, Box, Fab } from '@mui/material';
+import AddMemoButton from "./components/AddMemoButton";
 import MemoList from "./components/MemoList";
 import { getAllMemos } from "@/api";
+import { Add } from '@mui/icons-material';
 
 export default async function Home() {
-const memos = await getAllMemos();
+  const memos = await getAllMemos();
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-200">
-      <h1 className="text-4xl font-bold text-gray-700 -mt-32">memoApp</h1>
-      <div className="w-full max-w-xl mt-5">
-        <div className="w-full px-8 py-6 bg-white shadow-md rounded-lg">
-          {/* <AddMemo /> */}
-          <MemoList memos={memos}/>
-        </div>
-      </div>
-    </main>
+    <Box
+      component="main"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        minHeight: '100vh',
+        py: 2,
+        bgcolor: 'grey.200',
+        position: 'relative',
+      }}
+    >
+      <Typography
+        variant="h2"
+        component="h1"
+        sx={{
+          fontWeight: 'bold',
+          color: 'text.secondary',
+          mt: 4,
+          mb: 4,
+        }}
+      >
+        memoApp
+      </Typography>
+
+      <Container maxWidth="sm">
+        <Paper
+          elevation={3}
+          sx={{
+            width: '100%',
+            p: 3,
+            bgcolor: 'background.paper',
+          }}
+        >
+          <MemoList memos={memos} />
+        </Paper>
+      </Container>
+
+      <AddMemoButton />
+    </Box>
   );
 }

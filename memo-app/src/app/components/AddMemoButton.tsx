@@ -1,35 +1,35 @@
-
 "use client";
 
-import { addMemos } from '@/api';
-import React, { ChangeEvent, FormEvent, useState} from 'react';
+import React, { useState } from 'react';
+import { Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import AddMemo from './AddMemo';  // AddMemoコンポーネントをインポート
 
-const AddMemo = () => {
+const AddMemoButton = () => {
+    const [open, setIsOpenAddMemo] = useState(false);
 
-    const [showAddMenu,setShowAddMenu] = useState(false);
-
-    const hadleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-
-        await addMemos({ id: uuidv4(), title: title, content: 'content'});
-
-        setTitle('');
-    }
+    const handleOpen = () => setIsOpenAddMemo(true);
+    const handleClose = () => setIsOpenAddMemo(false);
 
     return (
-        <form className='mb-4 space-y-3' onSubmit={hadleSubmit}>
-            <input
-            type="text"
-            className='w-full border px-4 py-2 rounded-lg focus:outline-none focus:border-blue-400'
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
-            }
-            value={title}
-            />
-            <button className='w-full px-4  py-2 text-white bg-blue-500 rounded transform hover:bg-blue-400 hover:scale-95 duration-200'>AddMemo</button>
-        </form>
+        <>
+            <Fab
+                color="primary"
+                aria-label="add"
+                onClick={handleOpen}
+                sx={{
+                    position: 'fixed',
+                    bottom: 16,
+                    right: 16,
+                    width: 80,
+                    height: 80,
+                }}
+            >
+                <AddIcon sx={{ fontSize: 40 }} />
+            </Fab>
+            <AddMemo open={open} onClose={handleClose} />
+        </>
     );
 }
 
-export default AddMemo;
-
+export default AddMemoButton;
