@@ -33,6 +33,7 @@
    MemoPageと同じ作りの新規メモ追加ページ．
    
    uuidで一意性の保証し，idの衝突を起きないようにしている．
+   
    ![image](https://github.com/user-attachments/assets/9f78302d-35f1-4eb7-9c3a-b30d27256967)
 
 9. AddMemoButton
@@ -42,9 +43,15 @@
   ![image](https://github.com/user-attachments/assets/b578deec-3592-4eff-823e-786738411e9e)
 
 # 使用方法
-`npm run dev`と`npm run json-server`を打ち込む．<br>
-devは`http://localhost:3000 `でフロントエンドのサーバーを起動し，<br>
-json-serverは`http://localhost:3001`でAPIサーバーを起動させている
+1. `npm install`
+   
+    package.json に記載されている全ての依存パッケージをインストールする
+3. `npm run dev`
+   
+   devは`http://localhost:3000 `でフロントエンドのサーバーを起動する
+5. `npm run json-server`
+
+   json-serverは`http://localhost:3001`でAPIサーバーを起動する
 
 # 改善点
 - 現段階ではD&Dで順序を入れ替えることはできるが，それをDBに保存していないため，リロード時に順番が元に戻ってしまう．どうするかが迷いどころだったため，そのままにした．
