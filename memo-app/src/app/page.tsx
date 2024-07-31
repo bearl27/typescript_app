@@ -2,7 +2,6 @@ import { Container, Typography, Paper, Box, Fab } from '@mui/material';
 import AddMemoButton from "./components/AddMemoButton";
 import MemoList from "./components/MemoList";
 import { getAllMemos } from "@/api";
-import { Add } from '@mui/icons-material';
 
 export default async function Home() {
   const memos = await getAllMemos();

@@ -10,8 +10,7 @@ import {
     TextField,
     Button,
     Dialog,
-    DialogContent,
-    DialogActions
+    DialogContent
 } from '@mui/material';
 
 interface MemoPageProps {
