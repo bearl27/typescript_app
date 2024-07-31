@@ -22,13 +22,13 @@ export const addMemos = async (memo: Memos ): Promise<Memos> => {
     return newMemo;
 };
 
-export const editMemos = async (id: string, newTitle:string ): Promise<Memos> => {
-    const res = await fetch(`http://localhost:3001/memos/${id}`,{
+export const editMemos = async (id: string, newTitle: string, newContent: string): Promise<Memos> => {
+    const res = await fetch(`http://localhost:3001/memos/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({title: newTitle}),
+        body: JSON.stringify({ title: newTitle, content: newContent }),
     });
     const updatedMemo = await res.json();
     return updatedMemo;
@@ -39,3 +39,4 @@ export const deleteMemos = async (id: string): Promise<void> => {
         method: 'DELETE',
     });
 };
+
