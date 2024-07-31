@@ -41,6 +41,11 @@
    
   ![image](https://github.com/user-attachments/assets/b578deec-3592-4eff-823e-786738411e9e)
 
+# 使用方法
+`npm run dev`と`npm run json-server`を打ち込む．<br>
+devは`http://localhost:3000 `でフロントエンドのサーバーを起動し，<br>
+json-serverは`http://localhost:3001`でAPIサーバーを起動させている
+
 # 改善点
 - 現段階ではD&Dで順序を入れ替えることはできるが，それをDBに保存していないため，リロード時に順番が元に戻ってしまう．どうするかが迷いどころだったため，そのままにした．
 - 今回はフロントエンドの課題ということで，バックエンドに力をいれないため，DBにjson-serverを使用し，楽した．
