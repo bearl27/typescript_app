@@ -17,6 +17,7 @@
 3. MemoList
    
    MemoがDBに格納されている分表示される．
+   メモの順番をドラッグ＆ドロップで変えることはできるが，DBに保存していないため，リロードすると元に戻る．
    
    ![image](https://github.com/user-attachments/assets/82ac894f-4294-4e90-9769-4f2be5b9fe56)
 
